@@ -9,10 +9,7 @@ A running record of things I've built — some AI agents, some not. Each one doc
 | Project | What it does | Status | Notes |
 |---|---|---|---|
 | [voice-note-router](./voice-note-router) | Speak a thought, it gets classified and routed to the right list (grocery/task/idea) automatically — real voice input, not just text | Working, in daily use | Full build log with 2 real bugs found via eval suite and fixed |
-| trip-planner *(in progress)* | Three AI agents with conflicting goals (budget, experience, logistics) negotiate a real travel itinerary | Scoping | — |
-| [get-it-done-today](./get-it-done-today) | Daily work clarity tool | Live at getitdonetoday.replit.app | Build log not yet written |
-| [game-of-life](./game-of-life) | Conway's Game of Life, no signups required | Built | Build log not yet written |
-| [newsletter-brief-automation](./newsletter-brief-automation) | Automated weekly newsletter digest via Claude Cowork | Working | Build log not yet written |
+| [game-of-life](./game-of-life) | RPG-style self-growth app — level up real-life skills (Social, Career, Health, Mind, Creativity) by completing daily quests for XP | Built, runs on Replit | Build log not yet written. Auth is Replit-coupled, so it won't run from a plain clone — see its README |
 
 ## How projects are documented
 
@@ -20,7 +17,7 @@ Where a build log exists, it covers: real prompts used, real bugs hit, real fixe
 
 ## Stack
 
-Claude (Anthropic API) for reasoning-heavy projects, Claude Code for development, Python for most agent logic. Each project's own README lists specifics.
+Claude (Anthropic API) for reasoning-heavy projects, Claude Code for development. Language depends on the project — Python for the agent logic, TypeScript/React for the web apps. Each project's own README lists specifics.
 
 ## About
 
