@@ -1,49 +1,49 @@
 # Voice Note Router
 
-Speak a thought — it gets classified and routed automatically. "Grab milk on the way home" lands in your grocery list. "Call the landlord before Friday" becomes a task with a due date. "What if the app synced across devices" gets saved as an idea. No manual sorting.
+Speak a thought and it gets classified and routed automatically. "Grab milk on the way home" lands in the grocery list. "Call the landlord before Friday" becomes a task with a due date. "What if the app synced across devices" gets saved as an idea.
 
-**Full build story, including the real bugs and how they were found and fixed → [BUILD_LOG.md](./BUILD_LOG.md)**
+**Full build story, including the bugs an eval suite actually caught: [BUILD_LOG.md](./BUILD_LOG.md)**
 
 ## What it does
 
-- Classifies free-text (or spoken) notes into `grocery`, `task`, or `idea`
+- Classifies free-text or spoken notes into `grocery`, `task`, or `idea`
 - Extracts due dates from natural phrasing ("by Friday," "in three weeks," "end of month")
-- Writes to real local files, with duplicate detection that understands quantity ("eggs" vs "a dozen eggs" are the same item)
-- Keeps short-term memory across a session, so "add that too" or "make that next Tuesday" resolves correctly against recent notes — and honestly flags it when it *can't* resolve a reference, instead of guessing
-- Handles compound sentences ("grab milk and call the dentist") by splitting them into separate correctly-classified entries
-- Real voice input: a phone-accessible page records audio, transcribes it locally (faster-whisper), and routes it through the same pipeline as typed text
-- `list` and `undo` commands for actually using it day to day
+- Deduplicates grocery items by content, not exact string: "eggs" and "a dozen eggs" are the same item
+- Resolves references against recent notes ("add that too," "make that next Tuesday"), and returns an explicit unresolved state instead of guessing when a reference doesn't have a clear match
+- Splits compound sentences ("grab milk and call the dentist") into separate, correctly-classified entries
+- Voice input: a phone-facing page records audio, transcribes it locally with faster-whisper, and routes it through the same pipeline as typed input
+- `list` and `undo` for actual daily use, not just single-shot demos
 
 ## Why this exists
 
-Most "voice note → structured list" demos stop at the happy path. This one is built around the opposite assumption: a model will confidently produce well-formed, wrong output, and the only way to catch that is to define correctness in advance and test against it — including the cases you expect to break something.
+Most voice-note-to-structured-list demos stop at the happy path. This one is built around the opposite assumption: an LLM will produce confident, well-formed, wrong output, and the only way to catch that is to define correctness in advance and test against it, including cases designed to break something.
 
 ## Architecture
 
 ```
-note_router.py   — core classification, validation, memory, dedup, file writes
-run_evals.py     — 24-case eval suite (deterministic assertions, not vibes)
-server.py        — FastAPI server for voice input from a phone
-static/index.html — mobile recording page
+note_router.py     : classification, validation, memory, dedup, file writes
+run_evals.py       : 24-case eval suite, deterministic assertions
+server.py          : FastAPI server for voice input
+static/index.html  : mobile recording page
 ```
 
-**The model (Claude) only ever reads text and returns text.** It never touches a file directly. `note_router.py` is what validates Claude's response and decides what actually happens — this separation is deliberate and explained in the build log.
+Claude only reads text and returns text; it never touches a file. `note_router.py` validates every response and decides what happens next. Every bug documented in the build log comes from a gap between what Claude said and what the code checked.
 
 ## Running it
 
-**Text input (CLI):**
+**CLI:**
 ```bash
 python note_router.py
 ```
-Type notes one at a time. Type `exit` to quit, `list` to see current lists, `undo` to remove the last entry.
+`exit` to quit, `list` to view current lists, `undo` to remove the last entry.
 
-**Voice input (from your phone):**
+**Voice, from a phone:**
 ```bash
 python server.py --preload
 ```
-Requires an HTTPS tunnel (e.g. `cloudflared tunnel --url http://localhost:8000`) since phone browsers block microphone access over plain HTTP. See build log for full setup and why.
+Needs an HTTPS tunnel (`cloudflared tunnel --url http://localhost:8000`), since phone browsers refuse mic access over plain HTTP. Setup and reasoning in the build log.
 
-**Run the eval suite:**
+**Eval suite:**
 ```bash
 python run_evals.py
 ```
@@ -57,12 +57,12 @@ pip install -r requirements.txt
 $env:ANTHROPIC_API_KEY = "your-key-here"
 ```
 
-Get a key at [console.anthropic.com](https://console.anthropic.com). Voice input additionally requires `faster-whisper` (installed via requirements.txt) — no external API key needed, transcription runs locally.
+Key from [console.anthropic.com](https://console.anthropic.com). Voice transcription runs locally via `faster-whisper`, no separate API key needed.
 
-## What's real vs. what's next
+## Status
 
-**Working, tested, in use:** everything above.
+Working and in daily use: everything listed above.
 
-**Deliberately not built:** multiple agents that negotiate/disagree with each other. This project is a single-agent classification task; that idea needs a project with genuinely conflicting objectives to be worth building, which is a separate project.
+Not built: multi-agent negotiation. This is a single-agent classification task, and that pattern belongs to a project with actual conflicting objectives, not this one.
 
-**Known limitation:** voice input currently requires the host laptop to stay on and running, plus an active tunnel. Works from anywhere with cellular data once the tunnel is up — it's an availability constraint, not a range constraint.
+**Constraints:** voice input needs the host machine and tunnel running continuously; the tunnel URL changes on every restart without a paid, named tunnel; output lives in local text files, not a shared list app.
