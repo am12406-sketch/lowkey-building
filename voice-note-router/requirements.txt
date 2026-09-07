@@ -1,0 +1,7 @@
+anthropic
+
+# --- voice web app (server.py) ---
+fastapi
+uvicorn
+python-multipart
+faster-whisper

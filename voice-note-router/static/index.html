@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Voice Note</title>
+<style>
+  :root { color-scheme: light dark; --bg:#0f1115; --card:#1a1d24; --fg:#e8eaed;
+          --muted:#9aa0a6; --accent:#4f8cff; --ok:#2fbf71; --warn:#e0a030; --err:#e5484d; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+         padding:max(16px,env(safe-area-inset-top)) 16px 40px; display:flex; justify-content:center; }
+  main { width:100%; max-width:520px; }
+  h1 { font-size:18px; font-weight:600; margin:4px 0 14px; display:flex; gap:8px; align-items:center; }
+  .card { background:var(--card); border-radius:14px; padding:16px; margin-bottom:14px; }
+  button { font:inherit; border:0; border-radius:10px; padding:12px 16px; color:#fff; background:var(--accent); cursor:pointer; }
+  button:disabled { opacity:.45; }
+  button.secondary { background:#2a2f3a; }
+  #rec { width:100%; height:104px; font-size:19px; font-weight:600; border-radius:16px; }
+  #rec.recording { background:var(--err); animation:pulse 1.2s ease-in-out infinite; }
+  #rec.answer { background:var(--warn); }
+  @keyframes pulse { 50% { filter:brightness(1.25); } }
+  textarea { width:100%; min-height:70px; background:#12151b; color:var(--fg); border:1px solid #2a2f3a;
+             border-radius:10px; padding:10px; font:inherit; resize:vertical; }
+  .row { display:flex; gap:8px; margin-top:10px; }
+  .row > button { flex:1; }
+  .muted { color:var(--muted); font-size:14px; }
+  .msg { padding:10px 12px; border-radius:10px; background:#12151b; }
+  .msg.ok { border-left:3px solid var(--ok); }
+  .msg.warn { border-left:3px solid var(--warn); }
+  .msg.err { border-left:3px solid var(--err); }
+  .pill { display:inline-block; font-size:12px; padding:2px 8px; border-radius:999px; background:#2a2f3a; }
+  label.toggle { display:flex; align-items:center; gap:8px; font-size:14px; color:var(--muted); }
+  h2 { font-size:13px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); margin:16px 0 4px; }
+  ul { margin:0; padding-left:20px; } li { margin:2px 0; }
+  .dim { opacity:.55; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Voice Note <span id="auth" class="pill" hidden>token</span></h1>
+
+  <div class="card">
+    <button id="rec">Tap to record</button>
+    <p id="status" class="muted" style="margin:10px 0 0">Ready.</p>
+    <div class="row" id="yesno" hidden>
+      <button id="yes">Yes</button>
+      <button id="no" class="secondary">No</button>
+    </div>
+    <label class="toggle" style="margin-top:12px">
+      <input type="checkbox" id="confirm" /> Confirm before saving
+    </label>
+  </div>
+
+  <div class="card" id="reviewCard" hidden>
+    <label class="muted" for="text">Transcript — edit if needed, then route</label>
+    <textarea id="text"></textarea>
+    <div class="row">
+      <button id="route">Route it</button>
+      <button id="discard" class="secondary">Discard</button>
+    </div>
+  </div>
+
+  <div class="card" id="resultCard" hidden>
+    <div id="msg" class="msg"></div>
+    <div class="row"><button id="startover" class="secondary">Start over</button></div>
+  </div>
+
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <span class="muted">Current lists</span>
+      <button id="refresh" class="secondary" style="padding:6px 10px">Refresh</button>
+    </div>
+    <div id="lists"></div>
+  </div>
+</main>
+
+<script>
+const $ = (s) => document.querySelector(s);
+const TOKEN = new URLSearchParams(location.search).get("token") || "";
+if (TOKEN) $("#auth").hidden = false;
+
+// mode: "idle" (first note, show review) | "clarify" | "confirm" (auto-submit the answer)
+let mode = "idle";
+let mediaRecorder, chunks = [], recording = false, ttsUnlocked = false;
+const EXT = { "audio/webm":"webm", "audio/ogg":"ogg", "audio/mp4":"mp4", "audio/mpeg":"mp3" };
+
+try { $("#confirm").checked = localStorage.getItem("confirm") === "1"; } catch {}
+$("#confirm").addEventListener("change", () => {
+  try { localStorage.setItem("confirm", $("#confirm").checked ? "1" : "0"); } catch {}
+});
+
+function apiUrl(path) {
+  const p = new URLSearchParams();
+  if (TOKEN) p.set("token", TOKEN);
+  if ($("#confirm").checked) p.set("confirm", "1");
+  const s = p.toString();
+  return path + (s ? "?" + s : "");
+}
+
+function speak(text) {
+  if (!text || !("speechSynthesis" in window)) return;
+  try {
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = "en-US"; u.rate = 1.05;
+    speechSynthesis.speak(u);
+  } catch {}
+}
+
+async function toggleRecord() {
+  if (!ttsUnlocked) { speak(" "); ttsUnlocked = true; }   // iOS needs a gesture to unlock TTS
+  if (recording) { mediaRecorder.stop(); return; }
+  let stream;
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  } catch (e) {
+    setStatus("Mic blocked: " + e.message + " (a phone needs https — use the tunnel URL).", "err");
+    return;
+  }
+  chunks = [];
+  mediaRecorder = new MediaRecorder(stream);
+  mediaRecorder.ondataavailable = (e) => { if (e.data.size) chunks.push(e.data); };
+  mediaRecorder.onstop = async () => {
+    stream.getTracks().forEach((t) => t.stop());
+    recording = false;
+    $("#rec").classList.remove("recording");
+    $("#rec").textContent = mode === "idle" ? "Tap to record" : "Tap to answer";
+    await handleAudio(new Blob(chunks, { type: mediaRecorder.mimeType || "audio/webm" }));
+  };
+  mediaRecorder.start();
+  recording = true;
+  $("#rec").classList.add("recording");
+  $("#rec").textContent = "Recording — tap to stop";
+  setStatus("Recording…");
+}
+
+async function handleAudio(blob) {
+  setStatus("Transcribing…");
+  const base = (blob.type || "audio/webm").split(";")[0];
+  const fd = new FormData();
+  fd.append("audio", blob, "note." + (EXT[base] || "webm"));
+  let transcript = "";
+  try {
+    const r = await fetch(apiUrl("/transcribe"), { method: "POST", body: fd });
+    if (!r.ok) throw new Error((await r.json().catch(() => ({}))).detail || r.status);
+    transcript = (await r.json()).transcript || "";
+  } catch (e) {
+    setStatus("Transcription failed: " + e.message, "err");
+    return;
+  }
+  if (!transcript) { setStatus("Heard nothing — tap to try again.", "warn"); return; }
+
+  if (mode === "idle") {
+    $("#text").value = transcript;
+    $("#reviewCard").hidden = false;
+    setStatus('Heard: "' + transcript + '". Review and route.');
+  } else if (mode === "confirm") {
+    const d = transcript.trim().toLowerCase();
+    commit(/^(y|yeah|yep|sure|ok|go)/.test(d) ? "yes" : /^n/.test(d) ? "no" : d);
+  } else {
+    routeText(transcript);   // clarify: server folds it into the pending note
+  }
+}
+
+async function routeText(text) {
+  if (!text.trim()) return;
+  setStatus("Thinking…");
+  const fd = new FormData();
+  fd.append("text", text);
+  try {
+    const r = await fetch(apiUrl("/note-text"), { method: "POST", body: fd });
+    render(await r.json());
+  } catch (e) { setStatus("Failed: " + e.message, "err"); }
+}
+
+async function commit(decision) {
+  setStatus("…");
+  const fd = new FormData();
+  fd.append("decision", decision);
+  try {
+    const r = await fetch(apiUrl("/commit"), { method: "POST", body: fd });
+    render(await r.json());
+  } catch (e) { setStatus("Failed: " + e.message, "err"); }
+}
+
+async function startOver() {
+  try { await fetch(apiUrl("/reset"), { method: "POST" }); } catch {}
+  mode = "idle";
+  $("#reviewCard").hidden = true;
+  $("#resultCard").hidden = true;
+  $("#yesno").hidden = true;
+  $("#rec").className = "";
+  $("#rec").textContent = "Tap to record";
+  speak("Starting fresh.");
+  setStatus("Ready.");
+  loadLists();
+}
+
+function render(d) {
+  speak(d.speak || d.message);
+  const cls = !d.ok ? "err" : d.awaiting ? "warn" : "ok";
+  const head = d.stream && d.stream !== "unresolved_reference" && d.stream !== "unclassifiable"
+    ? `<span class="pill">${d.stream}</span> ` : "";
+  $("#resultCard").hidden = false;
+  $("#msg").className = "msg " + cls;
+  $("#msg").innerHTML = head + escapeHtml(d.message || "");
+
+  if (d.awaiting === "clarification") {
+    mode = "clarify";
+    $("#yesno").hidden = true;
+    $("#rec").className = "answer";
+    $("#rec").textContent = "Tap to answer";
+    setStatus("Answer by voice — tap to record.");
+  } else if (d.awaiting === "confirmation") {
+    mode = "confirm";
+    $("#yesno").hidden = false;
+    $("#rec").className = "answer";
+    $("#rec").textContent = "Tap to answer";
+    setStatus("Say yes or no — or use the buttons.");
+  } else {
+    mode = "idle";
+    $("#yesno").hidden = true;
+    $("#rec").className = "";
+    $("#rec").textContent = "Tap to record";
+    $("#text").value = "";
+    $("#reviewCard").hidden = true;
+    setStatus("Done.");
+  }
+  loadLists();
+}
+
+async function loadLists() {
+  try {
+    const r = await fetch(apiUrl("/lists"));
+    const d = await r.json();
+    $("#lists").innerHTML = ["grocery", "task", "idea"].map((k) => {
+      const items = d[k] || [];
+      const body = items.length
+        ? "<ul>" + items.map((x) => "<li>" + escapeHtml(x) + "</li>").join("") + "</ul>"
+        : '<p class="muted dim" style="margin:2px 0">(empty)</p>';
+      return `<h2>${k}${k === "grocery" ? "" : "s"} (${items.length})</h2>` + body;
+    }).join("");
+  } catch {}
+}
+
+function setStatus(t, cls) { const s = $("#status"); s.textContent = t; s.className = "muted " + (cls || ""); }
+function escapeHtml(s) { return String(s).replace(/[&<>"]/g, (c) =>
+  ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+
+$("#rec").addEventListener("click", toggleRecord);
+$("#route").addEventListener("click", () => routeText($("#text").value));
+$("#discard").addEventListener("click", () => { $("#text").value = ""; $("#reviewCard").hidden = true; setStatus("Discarded."); });
+$("#yes").addEventListener("click", () => commit("yes"));
+$("#no").addEventListener("click", () => commit("no"));
+$("#startover").addEventListener("click", startOver);
+$("#refresh").addEventListener("click", loadLists);
+loadLists();
+</script>
+</body>
+</html>
