@@ -1,0 +1,84 @@
+Refine the UI/UX with the following improvements:
+
+HOMEPAGE STRUCTURE (Hybrid Layout):
+
+1. Move Overall Progress to the very top in a compact hero section.
+   - Small circular level badge.
+   - Show “Level X – Title” beside it.
+   - XP progress bar directly below.
+   - Keep it compact.
+   - Reduce excessive vertical whitespace.
+
+2. Below the progress section, keep “Today’s Adventure” as the main hero.
+   - Maintain large playful heading.
+   - Keep 3 quest cards prominently displayed.
+   - Slight hover lift animation.
+   - Make XP bars thicker and more vibrant.
+   - Replace “Complete Quest” with “Claim XP”.
+
+3. Keep “Your Character Build” below quests.
+   - Tighten spacing slightly.
+   - Replace “0/100” with “0 XP”.
+   - Increase skill icon size slightly.
+   - Make progress bars thicker and more energetic.
+
+LEVEL-UP EXPERIENCE:
+
+When a level-up happens:
+- Badge enlarges slightly and glows.
+- Show floating “LEVEL UP!” text for 1–2 seconds.
+- Light confetti burst.
+- No blocking modal.
+- Keep it exciting but smooth.
+
+TIMELINE PAGE (Rename to “Your Journey”):
+
+Create a new page called “Your Journey”.
+
+Design it as a magical vertical adventure timeline:
+
+- Soft glowing vertical line down the center.
+- Each completed quest appears as a milestone node.
+- Node color matches skill color.
+- Slight fade-in animation when scrolling.
+
+Each milestone card includes:
+- Skill badge
+- XP gained
+- Date
+- Optional reflection text
+- Optional image
+
+IMAGE SUPPORT:
+
+Allow users to upload an image when completing a quest.
+Image upload must be optional.
+
+When claiming XP:
+- Show optional reflection text field.
+- Show optional “Add Photo” upload button.
+- Save image URL in database with the quest entry.
+- Store image in Supabase storage (or equivalent).
+- Associate image with user securely.
+
+On the Journey page:
+- If image exists, display it inside the milestone card.
+- Images should:
+  - Have rounded corners
+  - Slight scrapbook-style tilt (2–3 degrees)
+  - Soft shadow
+  - Hover lift animation
+
+If milestone includes:
+- Brave quest
+- Or level-up
+Make it slightly larger with soft glow and small sparkle effect.
+
+OVERALL FEEL:
+Playful.
+Slightly magical.
+B2C focused.
+Not analytical.
+Not SaaS-like.
+
+Make the app feel like a story of growth, not a productivity dashboard.

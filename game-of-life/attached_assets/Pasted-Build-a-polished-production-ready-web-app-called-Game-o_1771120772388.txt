@@ -1,0 +1,138 @@
+Build a polished, production-ready web app called “Game of Life”.
+
+It is a private RPG-style self-growth app where users level up real-life skills by completing small daily quests.
+
+This is an MVP, but the UI must look premium and modern.
+
+TECH STACK REQUIREMENTS:
+- Next.js (App Router)
+- Tailwind CSS
+- Supabase (Authentication + Database)
+- Framer Motion (for subtle animations)
+- Mobile-first responsive design
+- Clean, minimal UI
+- Smooth micro-interactions
+
+CORE CONCEPT:
+Users improve different life areas and gain XP like a video game.
+No social features. No leaderboards. Private-only experience.
+
+SKILL AREAS (Hardcode for MVP):
+1. Social
+2. Career
+3. Health
+4. Mind
+5. Creativity
+
+Each skill must store:
+- XP value
+- Level (calculated dynamically)
+- Progress bar
+
+Level Formula:
+level = floor(totalXP / 100) + 1
+
+OVERALL LIFE LEVEL:
+totalXP = sum of all skill XP
+lifeLevel = floor(totalXP / 100) + 1
+
+Life Level Titles:
+1–3 → Wanderer
+4–6 → Explorer
+7–10 → Builder
+11–15 → Challenger
+16+ → Architect
+
+DASHBOARD LAYOUT:
+
+Top Section:
+- Display “Life Level X – Title”
+- Animated XP progress bar
+- Subtext: “Keep leveling up.”
+
+Skill Grid:
+- 2 columns on mobile
+- Each card includes:
+  - Icon
+  - Skill name
+  - Level
+  - XP progress bar
+  - Soft gradient background
+  - Rounded corners
+
+DAILY QUEST SYSTEM:
+
+On page load, generate 3 random quests.
+
+Each quest includes:
+- Skill tag
+- Difficulty badge (Easy / Medium / Brave)
+- XP reward clearly displayed
+- Short supportive quest description
+- “Complete Quest” button
+
+XP RULES:
+Easy → +10 XP
+Medium → +25 XP
+Brave → +50 XP
+
+When user clicks “Complete Quest”:
+- Add XP to selected skill
+- Update totalXP
+- Animate XP bar smoothly
+- Show subtle confetti animation
+- Display “+XP Gained” popup
+- Recalculate levels dynamically
+
+QUEST GENERATION:
+Hardcode 10–15 quest templates per skill.
+Randomly assign difficulty.
+Keep tone supportive, calm, and non-preachy.
+
+Example tone:
+“Try starting a short conversation today.”
+“Take a 10-minute walk without distractions.”
+“Ask one thoughtful question in your next meeting.”
+
+HERO ARCHIVE FEATURE:
+
+After quest completion:
+- Optional text reflection field
+- Optional image upload
+- Save entry to database
+
+Create separate Archive page:
+- Reverse chronological list
+- Show skill tag
+- Date
+- Image thumbnail (if exists)
+- Caption text
+
+DESIGN STYLE:
+- Dark mode default
+- Background gradient (deep navy to purple)
+- Glassmorphism cards (subtle blur)
+- Rounded corners (2xl)
+- Soft glow accents
+- Smooth hover animations
+- Premium and calm aesthetic
+
+AUTHENTICATION:
+- Supabase email login
+- Each user sees only their own XP and archive
+
+MOBILE-FIRST:
+- Large tap-friendly buttons
+- Scroll-friendly cards
+- Clean spacing
+- No clutter
+
+DO NOT INCLUDE:
+- Leaderboards
+- Streak penalties
+- Social sharing
+- Notifications
+- Punishment mechanics
+
+End goal:
+A minimal but beautiful RPG-style life leveling app that feels like a real product, not a prototype.

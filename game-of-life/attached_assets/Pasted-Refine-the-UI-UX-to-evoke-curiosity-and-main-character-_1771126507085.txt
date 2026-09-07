@@ -1,0 +1,121 @@
+Refine the UI/UX to evoke curiosity and main-character energy.
+
+Do NOT make it feel like a productivity or task manager app.
+
+CORE EMOTION:
+The user should feel curious in the first 3 seconds.
+It should feel like something is unfolding, not like tasks are assigned.
+
+-----------------------------------------
+1️⃣ TOP SECTION – MAKE IT MYSTERIOUS
+-----------------------------------------
+
+Redesign the level section:
+
+- Large centered circular badge.
+- Level number inside.
+- Soft gradient ring (subtle, not neon).
+- Bold rank name under it (e.g., EXPLORER).
+- Add a one-line evolving tagline below:
+    Examples:
+    "Something is forming..."
+    "Momentum is building."
+    "You're becoming someone new."
+
+XP bar:
+- Thick.
+- Smooth animated fill.
+- Slight soft glow while filling.
+
+This section should feel like character progression, not stats.
+
+-----------------------------------------
+2️⃣ QUEST CARDS – ADD REVEAL ENERGY
+-----------------------------------------
+
+Keep the title "Today's Quests" (that’s fine).
+
+But change quest presentation:
+
+Instead of showing everything immediately,
+show each quest slightly collapsed with:
+
+- Icon
+- Short intriguing title
+- “Tap to Reveal” microtext
+
+When tapped:
+- Card expands smoothly.
+- Full description fades in.
+- XP reward animates in.
+- Subtle sparkle or motion effect.
+
+Completion:
+When user taps Complete:
+- XP number floats upward.
+- XP bar animates.
+- Small micro-copy appears:
+    "Character Development +25"
+    "Plot progressed."
+    "Small win."
+
+No loud confetti. Keep it cinematic and subtle.
+
+-----------------------------------------
+3️⃣ MICRO COPY – REMOVE PRODUCTIVITY TONE
+-----------------------------------------
+
+Avoid words like:
+- Tasks
+- Track
+- Metrics
+- Productivity
+
+Prefer:
+- Move
+- Scene
+- Chapter
+- Development
+- Growth
+- Momentum
+
+Keep tone light and cinematic.
+
+-----------------------------------------
+4️⃣ JOURNEY PAGE – MEMORY FEEL
+-----------------------------------------
+
+Keep current timeline structure.
+
+But:
+- Rename it to “Your Journey”.
+- Each entry should feel like a memory.
+- Add optional small caption tone examples:
+    "You showed up."
+    "Tried something new."
+    "Stayed consistent."
+
+No analytical feel.
+
+-----------------------------------------
+5️⃣ VISUAL STYLE
+-----------------------------------------
+
+Keep:
+- Bright flat minimal aesthetic.
+- White background.
+- Strong black typography.
+- Flat bold skill colors.
+- Large rounded cards.
+
+Add:
+- Slight hover lift.
+- Smooth transitions.
+- Subtle motion.
+
+No SaaS dashboard vibes.
+No heavy gradients.
+No glow-heavy gamer style.
+
+The app should feel like:
+A clean, modern life RPG where each day feels like an unfolding story.

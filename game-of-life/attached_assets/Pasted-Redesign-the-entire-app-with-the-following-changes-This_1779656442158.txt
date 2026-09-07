@@ -1,0 +1,122 @@
+Redesign the entire app with the following changes. This is a full visual and copy overhaul — do not change any core functionality, just the design, copy, and a few small UX additions.
+
+---
+
+TYPOGRAPHY
+Use Cormorant Garamond (import from Google Fonts) for all headlines, quest titles, and reflection text. Use DM Sans for all UI labels, buttons, navigation, and small text. These two fonts together are the entire identity of the app.
+
+---
+
+COLOR & THEME
+Background: #FAFAF8 (off-white, not pure white)
+Primary text: #1A1A1A
+Secondary text: #AAA
+Borders: #EDEAE2
+Cards: white with 1px #EDEAE2 border
+Dark surfaces (suggestion card, done screen): #1A1A1A with #F5F2EC text
+Skill colors:
+  Social: #E8685A
+  Health: #4CAF7D
+  Mind: #5B8DEF
+  Career: #F5A623
+
+---
+
+ONBOARDING (first screen, shown once)
+Dark background (#0E0E0E). Two lines:
+  Headline: "Small things." then italic "Big shifts." in Cormorant Garamond 40px
+  Subtext: "Every day, one small uncomfortable thing outside your routine. Nothing big. Just enough to move you."
+Then: "What do you want to work on?" in small uppercase label
+Show the 4 skill areas (Social, Health, Mind, Career) as a 2x2 grid of dark cards. Each card has the skill icon, name, and a one-line description. Tapping a card selects it and shows a colored border using that skill's color.
+User picks 1-2. Button at bottom: "Start" — disabled until at least one is selected.
+This screen only shows on first launch.
+
+---
+
+DASHBOARD (home screen)
+Top: global social proof line with a small pulsing green dot:
+  "2,847 people did something uncomfortable today."
+  Font: DM Sans 11px, uppercase, letter-spacing. Green dot animates with a slow breathe/pulse.
+
+Below that: Today's Suggestion card (dark #1A1A1A background, rounded 20px)
+  - Thin colored top accent line matching the user's selected focus area color
+  - Small label: "Today's suggestion · [Focus Area]"
+  - Quest text in Cormorant Garamond 20px bold
+  - One line below in small DM Sans: why this matters (1 sentence, written in a friend's voice, not a coach's voice)
+  - Two buttons: "I did this" (white button) and "Not today (2)" (dark grey, shows remaining swaps). User gets 2 swaps per day. When swaps run out the button says "No swaps left" and is disabled.
+
+Below suggestion: "Today's Scenes" section header
+  Quest cards with left colored accent border matching skill color. Each card shows:
+  - Skill icon + name + difficulty badge + XP
+  - Quest title in Cormorant Garamond
+  - Short quest description in DM Sans
+
+---
+
+QUEST DETAIL
+When user taps a quest card, show full detail:
+  - Skill + difficulty + XP at top in small uppercase
+  - Quest title large in Cormorant Garamond
+  - Description in DM Sans
+  - One "Mark as done →" button at bottom
+
+---
+
+REFLECTION SCREEN (appears after marking done)
+Shows as a bottom sheet or full screen:
+  Headline: "What actually happened?" in Cormorant Garamond 28px
+  Subtext: "One sentence is enough. This is for you."
+  Text area styled with italic Cormorant Garamond placeholder text: "Something happened. What was it?"
+  Optional: "Add a photo" small link below textarea
+  Two buttons: "Done ✓" (primary dark button) and "Skip" (ghost)
+
+---
+
+JOURNEY LOG
+Header: "Your Journey" in Cormorant Garamond 32px
+Each entry card:
+  - Skill icon + category + difficulty + XP at top
+  - Quest title in Cormorant Garamond bold
+  - Reflection text displayed as italic quote in a slightly inset block with a left border in the skill color
+  - Timestamp small at bottom
+  - If no reflection: show auto-caption in grey italic ("You showed up." / "You sat with it." / "You did the thing.")
+
+---
+
+PROFILE
+Header: "Your story." in Cormorant Garamond
+Subtext: "Things you actually did."
+Three stat boxes in a row: This Month / All Time / Top Area
+Focus area chips showing selected areas with colored backgrounds, plus an "+ edit" chip
+Timeline of entries with colored dots per skill area, quest title, and reflection below
+
+---
+
+WEEKLY / BOSS QUEST SECTION
+Keep existing Boss Quest functionality but style the card:
+  Dark background card
+  Large number showing weekly total completions globally
+  "X people did something uncomfortable this week"
+  Boss quest details below
+
+---
+
+NAVIGATION
+Three items: Quests (home), Journey, Profile
+Use simple symbolic icons, not emoji
+Active state: label becomes #1A1A1A and bold. Inactive: #CCC
+
+---
+
+COPY RULES (apply everywhere)
+- Remove any language that sounds like a productivity app or fitness tracker
+- No "complete your goals", "build habits", "track your progress"
+- Quest descriptions should sound like a dare from a smart friend, not instructions from a coach
+- Difficulty labels stay (Chill, Balanced, Spicy) — these work
+- Remove any mention of "RPG" or "level up like a game" from UI copy
+- Character tier names stay (Explorer, Architect etc) — these are fine
+
+---
+
+GLOBAL SOCIAL PROOF NUMBER
+The "2,847 people did something uncomfortable today" number at the top of the dashboard should increment slowly in real time (simulate with a slow random +1 every 30-60 seconds) to feel live.

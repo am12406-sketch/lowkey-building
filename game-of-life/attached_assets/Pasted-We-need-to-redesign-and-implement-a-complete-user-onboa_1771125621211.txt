@@ -1,0 +1,172 @@
+We need to redesign and implement a complete user onboarding experience for the Game of Life app.
+
+The product is a life RPG where users gain XP by completing real-life quests across different life areas.
+
+IMPORTANT:
+UI style must follow:
+- Bright flat minimal
+- Bold black typography
+- Strong flat colors (no gradients, no glow effects)
+- Large rounded cards
+- White or very light background
+- iOS-native feel
+- Clean but playful
+
+-------------------------------------
+1️⃣ FIRST-TIME USER FLOW (MANDATORY)
+-------------------------------------
+
+When a new user logs in for the first time:
+
+Step 1 – Welcome Screen
+Large bold heading:
+“Welcome to Game of Life”
+Subheading:
+“Build your character in real life.”
+CTA button:
+“Start Your Journey”
+
+Step 2 – Choose Focus Areas
+Show 5 life areas:
+- Social
+- Career
+- Health
+- Mind
+- Creativity
+
+Each as large flat color cards.
+User selects 1–3 areas they want to focus on first.
+These become “Priority Skills”.
+
+Step 3 – Difficulty Preference
+Ask:
+“How intense do you want your quests?”
+
+Options:
+- Chill (easy)
+- Balanced
+- Spicy (harder, more XP)
+
+This affects quest difficulty and XP rewards.
+
+Step 4 – Finish
+Button:
+“Enter the Game”
+
+After this, show the main dashboard.
+
+-------------------------------------
+2️⃣ QUEST GENERATION LOGIC (MVP)
+-------------------------------------
+
+Rules:
+- Show 3 daily quests total.
+- At least 1 quest must come from selected priority skills.
+- Allow 2 refreshes per day.
+- Add a “Change Focus” button so users can update priority skills anytime.
+
+No complex AI. Use a simple quest pool per category.
+
+-------------------------------------
+3️⃣ QUEST COMPLETION FLOW
+-------------------------------------
+
+When user completes a quest:
+
+Open a completion modal with:
+
+Heading:
+“Quest Complete 🎉”
+
+Fields:
+- Optional short reflection (1–2 lines text)
+- Optional photo upload (attach image)
+
+Button:
+“Claim XP”
+
+After claiming XP:
+- Show XP animation
+- Show level progress increase
+- Show which skill increased
+
+-------------------------------------
+4️⃣ PROGRESS TRACKING (VERY IMPORTANT)
+-------------------------------------
+
+Add a new tab: “Journey”
+
+This tab should show:
+
+Option A (MVP required):
+Vertical timeline view of completed quests.
+
+Each entry shows:
+- Skill icon
+- Quest name
+- XP earned
+- Small thumbnail if photo attached
+- Date
+
+Option B (if easy to add):
+Calendar view toggle.
+Each day shows:
+- Colored dot for completed quest category
+- Tap day to see details
+
+-------------------------------------
+5️⃣ PROFILE / CHARACTER SCREEN
+-------------------------------------
+
+Show:
+- Large Level badge
+- Total XP
+- Skill cards with:
+    - Skill Level
+    - XP progress bar
+    - Total quests completed per skill
+
+Design must use bold black headings and flat skill colors.
+
+-------------------------------------
+6️⃣ VISUAL STYLE RULES (CRITICAL)
+-------------------------------------
+
+- No dark mode.
+- No gradients.
+- No glow.
+- No SaaS dashboard vibe.
+- Big typography.
+- Clean layout.
+- Thick progress bars.
+- Strong flat color blocks.
+
+Color palette:
+Social: #FF5C5C
+Career: #FF8C42
+Health: #27D17F
+Mind: #2F80ED
+Creativity: #9B51E0
+Background: #FFFFFF or #F6F7FB
+Text: #111111
+
+-------------------------------------
+7️⃣ MOBILE FIRST
+-------------------------------------
+
+Must be fully optimized for mobile.
+Cards stacked vertically.
+Large tap targets.
+iOS feel.
+
+-------------------------------------
+
+Keep MVP simple.
+No social features.
+No streaks.
+No achievements yet.
+Focus on:
+- Personal growth
+- Fun
+- Clean UX
+- Clear progression

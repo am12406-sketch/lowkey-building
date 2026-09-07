@@ -1,0 +1,247 @@
+This is a complete visual redesign. Replace all existing styles entirely. Do not keep any previous styling. Start fresh from this spec.
+
+---
+
+FONTS
+Import from Google Fonts:
+https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap
+
+Rule: Cormorant Garamond is used ONLY for headlines, character name, quest titles, reflection text, and large display numbers.
+DM Sans is used for EVERYTHING else — labels, buttons, nav, badges, small text, captions.
+Never use any other font anywhere in the app.
+
+---
+
+COLOR TOKENS — use these exact values everywhere, no exceptions
+--bg: #F7F4EE
+--bg-card: #FFFFFF
+--bg-dark: #1A1A1A
+--bg-dark-2: #242424
+--text-primary: #1A1A1A
+--text-secondary: #777
+--text-muted: #BBB
+--text-light: #F5F2EC
+--border: #E8E4DC
+--green: #2D9B5A
+--social: #E8685A
+--health: #4CAF7D
+--mind: #5B8DEF
+--career: #F5A623
+
+---
+
+GLOBAL STYLES
+body / root background: #F7F4EE
+Border radius for cards: 20px
+Border radius for buttons: 12px
+Border radius for pills/badges: 20px
+All card shadows: none — use border: 1px solid #E8E4DC instead
+Font smoothing: -webkit-font-smoothing: antialiased
+
+---
+
+DASHBOARD SCREEN — build exactly this, top to bottom
+
+1. SOCIAL PROOF BAR
+Full width, padding 14px 24px, background #F7F4EE, border-bottom 1px solid #E8E4DC
+Left side: green pulsing dot (6px, #2D9B5A, slow pulse animation 2.5s ease-in-out) + text "2,847 people did something uncomfortable today"
+Text style: DM Sans 11px, font-weight 500, color #1A1A1A, letter-spacing 0.02em
+The number increments by 1 every 45-60 seconds randomly to feel live.
+
+2. CHARACTER SECTION
+Padding: 20px 24px 16px
+Avatar image: centered, max height 80px
+Character name: Cormorant Garamond 28px font-weight 600, color #1A1A1A, centered, sentence case (not all caps)
+Subtitle: DM Sans 12px, font-style italic, color #AAA, centered. Example: "Something is forming."
+XP bar: margin-top 12px, height 4px, background #E8E4DC, fill color #1A1A1A, border-radius 2px, width based on XP progress
+XP label: DM Sans 11px, color #BBB, text-align center, margin-top 6px. Example: "8 / 100 XP to Level 2"
+Streak pill: margin-top 10px, display inline-flex, background #FFF3E8, color #E8685A, padding 6px 14px, border-radius 20px, font-size 12px, font-weight 500, centered
+
+3. SKILL ICONS ROW
+Padding: 0 24px 16px
+Three skill icons side by side, equal width, flex row
+Each skill:
+  Icon: 44px x 44px rounded square, background is skill color at 15% opacity, icon centered
+  Skill name: DM Sans 11px font-weight 500, color #1A1A1A, centered, margin-top 6px
+  Level: DM Sans 10px, color #BBB, centered
+  Progress bar: height 3px, margin-top 4px, background #E8E4DC, fill is skill color, border-radius 2px
+Border between this section and next: 1px solid #E8E4DC, margin 0 24px
+
+4. TODAY'S SUGGESTION CARD
+Margin: 16px 24px 0
+Background: #1A1A1A
+Border-radius: 20px
+Padding: 22px
+No box shadow
+
+Structure inside:
+  a) Accent line: position absolute, top 0, left 0, right 0, height 3px, border-radius 20px 20px 0 0, color = user's focus area skill color
+
+  b) Eyebrow label: DM Sans 9px, letter-spacing 0.16em, text-transform uppercase, color #555, margin-bottom 10px
+     Text: "TODAY'S SUGGESTION · [FOCUS AREA NAME]"
+
+  c) Quest text: Cormorant Garamond 21px, font-weight 600, color #F5F2EC, line-height 1.3, margin-bottom 8px
+
+  d) Why line: DM Sans 12px, font-weight 300, color #555, line-height 1.6, margin-bottom 18px
+     This is one sentence explaining why this matters, written like a friend talking, not a coach.
+
+  e) Two buttons in a flex row, gap 8px:
+     Button 1 "I did this": background #F5F2EC, color #1A1A1A, border none, border-radius 10px, padding 11px, font-size 13px, font-weight 600, DM Sans, flex 1
+     Button 2 "Not today (N)": background #2A2A2A, color #666, border none, border-radius 10px, padding 11px 14px, font-size 11px, DM Sans, shows remaining swap count. Starts at 2. Each tap swaps suggestion and decrements. At 0: text becomes "No swaps left", button disabled, opacity 0.3.
+
+5. OTHERS TODAY SECTION
+Margin: 16px 24px 0
+Section label: DM Sans 9px, letter-spacing 0.14em, text-transform uppercase, color #CCC, margin-bottom 12px
+Text: "OTHERS TODAY"
+
+Show 4 anonymous activity items. Each item:
+  Layout: flex row, align-items flex-start, gap 10px, padding 10px 0, border-bottom 1px solid #E8E4DC
+  Left: colored dot 7px matching the skill area color (Social=red, Health=green, Mind=blue, Career=orange), margin-top 5px, flex-shrink 0
+  Right:
+    Action text: Cormorant Garamond 15px font-weight 600, color #1A1A1A, line-height 1.4
+    Time: DM Sans 10px, color #CCC, margin-top 3px
+
+Use these 4 entries:
+  - Social (red dot): "Talked to a stranger at a coffee shop." / "12 min ago"
+  - Career (orange dot): "Sent a message they'd been avoiding for weeks." / "1 hr ago"
+  - Mind (blue dot): "Sat alone for 10 minutes with nothing on." / "2 hrs ago"
+  - Health (green dot): "Did something physically scary." / "3 hrs ago"
+
+---
+
+QUESTS SCREEN (Today's Scenes)
+This is a separate tab — not on the dashboard.
+
+Section header: Cormorant Garamond 24px font-weight 600, color #1A1A1A, padding 20px 24px 12px
+
+Each quest card:
+  Background: white
+  Border: 1px solid #E8E4DC
+  Border-radius: 20px
+  Margin: 0 24px 12px
+  Padding: 20px
+  Left accent: 3px solid [skill color], position absolute, top 0, bottom 0, left 0, border-radius 20px 0 0 20px
+  
+  Inside:
+    Top row: skill icon (20px) + skill name (DM Sans 11px uppercase #999) on left / difficulty badge + XP on right
+    Difficulty badge: DM Sans 10px, font-weight 600, padding 3px 8px, border-radius 10px
+      Chill: background #E3F2FD, color #1565C0
+      Balanced: background #E8F5E9, color #2E7D32
+      Spicy: background #FFE8E8, color #E53E3E
+    XP: DM Sans 11px font-weight 600, color #1A1A1A
+    Quest title: Cormorant Garamond 18px font-weight 600, color #1A1A1A, line-height 1.35, margin-top 8px
+    Quest description: DM Sans 13px, color #777, line-height 1.55, margin-top 4px, font-weight 300
+
+Boss Quest card:
+  Background: #1A1A1A
+  Border-radius: 20px
+  Margin: 0 24px 12px
+  Padding: 20px
+  Top accent line: 3px solid #F5A623
+  Label: "WEEKLY CHALLENGE" DM Sans 9px uppercase letter-spacing 0.14em color #555
+  Quest title: Cormorant Garamond 18px font-weight 600 color #F5F2EC
+  Description: DM Sans 13px color #555 font-weight 300 line-height 1.55
+  XP badge: "+50 XP" DM Sans 12px font-weight 600 color #F5A623
+
+---
+
+JOURNEY SCREEN
+Header: Cormorant Garamond 32px font-weight 600 color #1A1A1A, padding 44px 24px 4px
+Subtext: DM Sans 12px color #AAA font-weight 300
+
+Date group headers: DM Sans 10px uppercase letter-spacing 0.12em color #BBB, padding 16px 24px 8px
+
+Each entry card:
+  Background: white
+  Border: 1px solid #E8E4DC
+  Border-radius: 20px
+  Margin: 0 24px 12px
+  Padding: 20px
+  
+  Top row: skill icon + skill name (DM Sans 10px uppercase #999) + difficulty badge / XP on right
+  Quest title: Cormorant Garamond 16px font-weight 600 color #1A1A1A, margin-top 8px, line-height 1.35
+  Reflection block: margin-top 10px, padding 12px 14px, background #F7F4EE, border-left 2px solid [skill color], border-radius 0 8px 8px 0
+    Text: Cormorant Garamond 14px font-style italic color #555 line-height 1.6
+    If no reflection: DM Sans 12px italic color #CCC. Auto-captions: "You showed up." / "You sat with it." / "You did the thing."
+  Timestamp: DM Sans 10px color #CCC margin-top 8px
+
+---
+
+PROFILE SCREEN
+Header: Cormorant Garamond 32px "Your story." + DM Sans 12px "Things you actually did." below
+
+Three stat boxes in flex row, gap 8px, margin 20px 24px:
+  Each box: white bg, 1px #E8E4DC border, border-radius 16px, padding 14px, text-align center
+  Number: Cormorant Garamond 30px font-weight 700 color #1A1A1A
+  Label: DM Sans 9px uppercase letter-spacing 0.1em color #CCC
+
+Focus chips row: flex wrap, gap 6px, margin 0 24px 24px
+  Each chip: padding 6px 14px, border-radius 20px, DM Sans 11px font-weight 500
+  Color: background = skill color at 12% opacity, text = skill color
+  Edit chip: background #F0EDE6, color #CCC
+
+Timeline entries: margin 0 24px
+  Each: flex row, gap 14px
+  Left col: colored dot (8px, skill color) + vertical line (1px #E8E4DC) connecting entries
+  Right: date label (DM Sans 9px uppercase #CCC) + quest title (Cormorant Garamond 15px bold) + reflection (DM Sans 11px italic #AAA)
+
+---
+
+NAVIGATION BAR
+Height: 64px
+Background: white
+Border-top: 1px solid #E8E4DC
+Three items: Quests, Journey, Profile
+Each item: flex column, align center, gap 4px
+Icon: 18px, simple line icon (not filled, not emoji)
+Label: DM Sans 9px uppercase letter-spacing 0.1em
+Inactive: color #CCC
+Active: color #1A1A1A, font-weight 600
+
+---
+
+REFLECTION MODAL (appears after "I did this")
+Background overlay: rgba(0,0,0,0.4)
+Modal: white, border-radius 24px 24px 0 0, padding 28px 24px, position fixed bottom 0 left 0 right 0
+
+Header: Cormorant Garamond 28px font-weight 600 "What actually happened?"
+Subtext: DM Sans 12px color #AAA "One sentence is enough. This is for you."
+Quest context: DM Sans 10px uppercase color #BBB margin-top 4px "[SKILL] · +[XP] XP"
+
+Textarea: 
+  Background white
+  Border: 1px solid #E8E4DC
+  Border-radius: 14px
+  Padding: 16px
+  Font: Cormorant Garamond 15px italic
+  Placeholder: "Something happened. What was it?" color #D5D1C8
+  Height: 120px
+  Margin-top: 20px
+
+"Add a photo" link: DM Sans 11px color #CCC, margin-top 8px, display flex align-items center gap 6px
+
+Two buttons:
+  "Done ✓": full width, background #1A1A1A, color #F5F2EC, border-radius 12px, padding 16px, DM Sans 13px font-weight 500
+  "Skip": full width, background none, border none, color #CCC, DM Sans 11px, padding 10px
+
+---
+
+ONBOARDING (first launch only)
+Background: #0E0E0E, full screen
+
+Top: DM Sans 10px uppercase letter-spacing 0.18em color #444 "GAME OF LIFE"
+Headline: Cormorant Garamond 40px "Small things." then new line italic color #666 "Big shifts."
+Body: DM Sans 13px font-weight 300 color #555 line-height 1.7 "Every day, one small uncomfortable thing outside your routine. Nothing big. Just enough to move you."
+
+Question label: DM Sans 11px uppercase letter-spacing 0.12em color #555 margin-top 40px "What do you want to work on?"
+
+2x2 grid of focus cards, gap 10px:
+  Each card: background #1A1A1A, border-radius 16px, padding 18px, border 1.5px solid transparent
+  Selected state: border-color = skill color, background #222
+  Icon: 20px emoji, margin-bottom 10px
+  Name: DM Sans 14px font-weight 600 color #F5F2EC
+  Desc: DM Sans 11px font-weight 300 color #555 line-height 1.5
+
+Note: DM Sans 11px color #333 text-align center "Pick one or two. You can change this anytime."
+
+Start button: full width, background #F5F2EC, color #0E0E0E, border-radius 14px, padding 17px, DM Sans 13px font-weight 600 uppercase letter-spacing 0.06em. Disabled (opacity 0.2) until at least one area selected.

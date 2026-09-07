@@ -1,0 +1,14 @@
+node_modules
+dist
+.DS_Store
+server/public
+vite.config.ts.*
+*.tar.gz
+
+# Replit package-manager cruft
+.upm/
+.config/
+
+# Personal photos — build-history text/screenshots in attached_assets/ are kept,
+# but camera-roll images are not
+attached_assets/IMG_*

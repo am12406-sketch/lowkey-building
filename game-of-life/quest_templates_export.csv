@@ -1,0 +1,83 @@
+id,skill,text,difficulty,xp,is_boss,active,min_skill_level
+15,Career,Spend 15 minutes on a skill you want to develop.,Balanced,15,false,true,1
+16,Career,Spend 20 minutes learning something new related to your field.,Balanced,20,false,true,1
+17,Career,"Block 30 minutes for deep, uninterrupted work.",Balanced,20,false,true,1
+18,Career,Draft a plan for a project you've been putting off.,Balanced,25,false,true,1
+12,Career,Organize your workspace for better focus.,Chill,5,false,true,1
+13,Career,Read an article about trends in your industry.,Chill,8,false,true,1
+14,Career,Write down 3 professional goals for this month.,Chill,10,false,true,1
+19,Career,Ask for feedback on a recent piece of work.,Spicy,35,false,true,1
+20,Career,Reach out to a professional contact to check in.,Spicy,40,false,true,1
+21,Career,Update one section of your resume or portfolio.,Spicy,50,false,true,1
+22,Career,Apply to a new opportunity or pitch an idea to your team.,Spicy,50,true,true,1
+71,Career,One-Slide Power Move: Create a single-slide (or screenshot) proposal to improve something at work and send it to the right channel today.,Spicy,50,true,true,1
+72,Career,"Lightning Demo: Show someone (or record a 60-sec walkthrough) of something you built/learned/figured out this week—no prep, just ship it.",Spicy,50,true,true,1
+73,Career,"Question Upgrade: In your next meeting, ask one sharp question that changes the direction of the discussion.",Spicy,50,true,true,1
+48,Creativity,Brainstorm 5 ideas for a fun side project.,Balanced,15,false,true,1
+49,Creativity,Try a new creative tool or app for 15 minutes.,Balanced,20,false,true,1
+50,Creativity,Write a short poem or haiku.,Balanced,20,false,true,1
+51,Creativity,Rearrange or decorate a small space in your home.,Balanced,25,false,true,1
+45,Creativity,Doodle freely for 5 minutes without lifting your pen.,Chill,5,false,true,1
+46,Creativity,Listen to a genre of music you don't usually explore.,Chill,8,false,true,1
+47,Creativity,Take a photo of something beautiful you notice today.,Chill,10,false,true,1
+52,Creativity,Sketch something simple for 10 minutes.,Spicy,35,false,true,1
+53,Creativity,Try cooking a recipe you have never made before.,Spicy,40,false,true,1
+54,Creativity,Write a short story in 100 words or less.,Spicy,50,false,true,1
+55,Creativity,"Create a complete piece of art, writing, or music from scratch.",Spicy,50,true,true,1
+80,Creativity,Constraint Creator: Create something using 3 random words you see around you (title must include all 3).,Spicy,50,true,true,1
+81,Creativity,"Remix Boss: Take an old idea/draft and improve it in one bold way, then show it to one person.",Spicy,50,true,true,1
+82,Creativity,"Public Drop: Share a rough creation today (post, sketch, snippet, demo). No perfection pass.",Spicy,50,true,true,1
+27,Health,Do a 5-minute stretching routine.,Balanced,15,false,true,1
+28,Health,Take a 10-minute walk without distractions.,Balanced,20,false,true,1
+29,Health,Do 10 push-ups or sit-ups right now.,Balanced,20,false,true,1
+30,Health,Spend 10 minutes doing light exercise.,Balanced,25,false,true,1
+23,Health,"Take 3 slow, deep breaths before your next meal.",Chill,5,false,true,1
+24,Health,Drink 8 glasses of water today.,Chill,8,false,true,1
+25,Health,Eat a piece of fruit as a snack today.,Chill,8,false,true,1
+26,Health,Take the stairs instead of the elevator today.,Chill,10,false,true,1
+31,Health,Prepare a healthy meal from scratch.,Spicy,40,false,true,1
+32,Health,Go to bed 30 minutes earlier tonight.,Spicy,35,false,true,1
+33,Health,Complete a full 30-minute workout session.,Spicy,50,true,true,1
+74,Health,"Step Boss: Hit 8,000 steps today—your last 1,000 must be outside after dinner.",Spicy,50,true,true,1
+75,Health,Sweat Ladder: Do 10 squats + 10 push-ups + 30-sec plank. Repeat the ladder 3 times (rest allowed).,Spicy,50,true,true,1
+76,Health,Two-Color Plate: Build one meal using only two main colors of whole foods (example: green + red). No ultra-processed sides.,Spicy,50,true,true,1
+37,Mind,Write down 3 things you are grateful for.,Balanced,15,false,true,1
+38,Mind,Meditate for 5 minutes today.,Balanced,15,false,true,1
+39,Mind,Solve a puzzle or brain teaser.,Balanced,20,false,true,1
+40,Mind,Reflect on a recent challenge and what you learned from it.,Balanced,25,false,true,1
+34,Mind,Write down one thing you learned today.,Chill,5,false,true,1
+35,Mind,Try a short breathing exercise to relax.,Chill,8,false,true,1
+36,Mind,Spend 10 minutes without any screens.,Chill,10,false,true,1
+41,Mind,Read 10 pages of a book.,Spicy,35,false,true,1
+42,Mind,Spend 15 minutes journaling about your day.,Spicy,40,false,true,1
+43,Mind,Watch a documentary about something you are curious about.,Spicy,50,false,true,1
+44,Mind,Read an entire chapter of a non-fiction book and write a summary.,Spicy,50,true,true,1
+77,Mind,No-Scroll Fortress: Block social feeds for a 3-hour window today and replace it with one intentional activity.,Spicy,50,true,true,1
+78,Mind,"Curiosity Rabbit Hole: Learn one new topic for 20 minutes, then write 5 bullets + 1 analogy that makes it easy.",Spicy,50,true,true,1
+79,Mind,Explain Like I'm 5: Take a concept you know and explain it to someone in 5 simple sentences.,Spicy,50,true,true,1
+4,Social,Send a thoughtful message to a friend you haven't spoken to in a while.,Balanced,15,false,true,1
+5,Social,Practice active listening in your next conversation.,Balanced,20,false,true,1
+6,Social,Share something personal in a safe conversation.,Balanced,20,false,true,1
+7,Social,Write a thank-you note to someone who helped you recently.,Balanced,25,false,true,1
+57,Social,Speak to one person today that you have never spoken to before. Minimum: 1 question + 1 follow-up.,Balanced,20,false,true,1
+58,Social,"In your next small talk moment, keep the conversation going 30 seconds longer than you normally would.",Balanced,15,false,true,1
+59,Social,"Use something happening around you (line, office moment, event, etc.) to start a short conversation.",Balanced,20,false,true,2
+61,Social,"Talk to someone you see regularly but have never spoken to (gym, office, building, café).",Balanced,20,false,true,2
+63,Social,"Share one small personal detail during a conversation (a preference, opinion, or tiny story).",Balanced,20,false,true,2
+1,Social,Give a genuine compliment to someone today.,Chill,5,false,true,1
+2,Social,Ask one thoughtful question in your next interaction.,Chill,8,false,true,1
+3,Social,Spend 10 minutes catching up with a family member.,Chill,10,false,true,1
+56,Social,"Have a 2-sentence exchange with a barista, cashier, or store employee that goes beyond ordering.",Chill,10,false,true,1
+60,Social,Be the first person to say hello in a setting where you normally wait.,Chill,8,false,true,1
+62,Social,"Instead of ""How are you?"", ask one specific question like ""What's been interesting today?"" or ""What's keeping you busy lately?""",Chill,10,false,true,1
+65,Social,"Ask someone for a small recommendation (food, show, local spot, etc.) and respond to their answer.",Chill,10,false,true,1
+8,Social,Try starting a short conversation with someone new today.,Spicy,35,false,true,1
+9,Social,Introduce yourself to someone in a new setting.,Spicy,40,false,true,1
+10,Social,Invite someone for a coffee or a short walk.,Spicy,50,false,true,1
+11,Social,Host a small gathering or game night with friends.,Spicy,50,true,true,1
+64,Social,Talk to someone at work outside your immediate team for at least 2 minutes.,Spicy,35,false,true,2
+66,Social,"In any social setting today, be the first person to start a conversation with someone new.",Spicy,50,true,true,1
+67,Social,Send one specific invite (time and place) without softening it. Keep it direct.,Spicy,50,true,true,1
+68,Social,"In a group, shift the conversation by introducing a new topic or question.",Spicy,50,true,true,1
+69,Social,Introduce yourself confidently to someone you find slightly intimidating.,Spicy,50,true,true,1
+70,Social,Pull together 2 or more people for something spontaneous and make it happen today.,Spicy,50,true,true,1

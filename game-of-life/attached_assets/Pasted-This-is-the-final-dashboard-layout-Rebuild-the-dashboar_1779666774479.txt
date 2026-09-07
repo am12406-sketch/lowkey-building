@@ -1,0 +1,144 @@
+This is the final dashboard layout. Rebuild the dashboard screen exactly as specified below. Do not change any other screens.
+
+---
+
+DASHBOARD LAYOUT — top to bottom, in this exact order:
+
+---
+
+1. STICKY BANNER (top, always visible)
+Position: sticky top, z-index 10
+Background: #F7F4EE
+Border-bottom: 1px solid #E8E4DC
+Padding: 14px 24px
+Layout: flex row, align-items center, gap 8px
+Left: pulsing green dot — 6px, background #2D9B5A, border-radius 50%, animation slow breathe 2.5s ease-in-out infinite (scale 1 to 1.7, opacity 1 to 0.4)
+Right: DM Sans 11px font-weight 500 color #1A1A1A letter-spacing 0.02em
+Text: "[count] people did something uncomfortable today"
+The count starts at 2847 and increments by 1 randomly every 45-60 seconds.
+
+---
+
+2. CHARACTER SECTION
+Padding: 20px 24px 14px, text-align center
+Avatar image: max height 72px, centered
+Character name: Cormorant Garamond 26px font-weight 600 color #1A1A1A, sentence case
+Subtitle: DM Sans 12px italic color #AAA. Example: "Your story begins here."
+XP bar: height 4px, background #E8E4DC, fill #1A1A1A, border-radius 2px, margin 12px 8px 6px
+XP label: DM Sans 10px color #BBB centered. Example: "8 / 100 XP to Level 2"
+Streak pill: inline-flex, background #FFF3E8, color #E8685A, padding 5px 12px, border-radius 20px, DM Sans 12px font-weight 500
+
+---
+
+3. SKILL ICONS ROW
+Padding: 14px 24px
+Border-bottom: 1px solid #E8E4DC
+Flex row, equal width items
+Each skill item: flex column, align center, gap 4px
+  Icon box: 40x40px, border-radius 12px, background = skill color at 20% opacity, icon centered in skill color
+  Skill name: DM Sans 10px font-weight 500 color #1A1A1A
+  Level: DM Sans 9px color #BBB
+  Progress bar: width 100%, height 3px, background #E8E4DC, fill = skill color, border-radius 2px
+
+---
+
+4. SUGGESTION CARD
+Margin: 16px 24px 0
+Background: #1A1A1A
+Border-radius: 20px
+Overflow: hidden
+
+Inside top to bottom:
+  a) Accent line: height 3px, background = current focus area skill color, full width
+
+  b) Inner padding: 20px
+  
+  c) Eyebrow: DM Sans 9px letter-spacing 0.16em uppercase color #555 margin-bottom 10px
+     Text: "TODAY'S SUGGESTION · [FOCUS AREA]"
+
+  d) Quest text: Cormorant Garamond 20px font-weight 600 color #F5F2EC line-height 1.3 margin-bottom 8px
+
+  e) Why line: DM Sans 12px font-weight 300 color #555 line-height 1.6 margin-bottom 14px
+
+  f) Social proof row:
+     Border-top: 1px solid #2A2A2A
+     Border-bottom: 1px solid #2A2A2A
+     Padding: 12px 0
+     Margin-bottom: 16px
+     Layout: flex row, align-items center, gap 8px
+     Left: 6px dot, border-radius 50%, background = focus area skill color, slow pulse animation
+     Right: 
+       Count number: Cormorant Garamond 15px font-weight 600 color #F5F2EC
+       Label: DM Sans 12px font-weight 300 color #666 — "people did something like this today"
+     Count values per area: Social=312, Mind=189, Career=97, Health=241
+     Count updates when suggestion is swapped.
+
+  g) Two buttons, flex row, gap 8px:
+     "I did this": flex 1, background #F5F2EC, color #1A1A1A, border none, border-radius 10px, padding 12px, DM Sans 13px font-weight 600
+     "Not today (N)": background #2A2A2A, color #666, border none, border-radius 10px, padding 12px 14px, DM Sans 11px
+     Swaps start at 2. Each tap changes suggestion and decrements counter. At 0: text "No swaps left", disabled, opacity 0.3.
+
+The suggestion card is completely independent of quest completion. It never disappears or changes when quests are marked done. It resets daily.
+
+---
+
+5. OTHERS TODAY SECTION
+Margin-top: 16px
+No section header label needed.
+
+4 anonymous entries. Each entry:
+  Padding: 14px 24px
+  Border-bottom: 1px solid #E8E4DC
+  Layout: flex row, align-items flex-start, gap 12px
+
+  Left: colored dot 7px, border-radius 50%, flex-shrink 0, margin-top 6px
+
+  Right column:
+    Action text: Cormorant Garamond 15px font-weight 600 color #1A1A1A line-height 1.4 margin-bottom 5px
+    Reflection quote: DM Sans 12px font-weight 300 font-style italic color #888 line-height 1.5 margin-bottom 4px
+    Time: DM Sans 10px color #CCC
+
+Use exactly these 4 entries:
+  1. Dot: #E8685A
+     Action: "Talked to a stranger at a coffee shop for the first time."
+     Quote: "Awkward for about 10 seconds. Then we talked for 20 minutes."
+     Time: "12 min ago"
+
+  2. Dot: #F5A623
+     Action: "Sent a message they'd been drafting for two months."
+     Quote: "They replied within an hour. We have a call next week."
+     Time: "1 hr ago"
+
+  3. Dot: #5B8DEF
+     Action: "Sat alone for 10 minutes. No phone, no audio."
+     Quote: "Harder than I expected. Did it anyway."
+     Time: "2 hrs ago"
+
+  4. Dot: #4CAF7D
+     Action: "Went to a gym class alone where they knew nobody."
+     Quote: "Stood in the back. Still showed up."
+     Time: "3 hrs ago"
+
+This section is always visible. It does not change when quests are completed.
+
+---
+
+6. DIVIDER
+1px solid #E8E4DC, margin 16px 24px
+
+---
+
+7. TODAY'S QUESTS SECTION
+Padding: 16px 24px 0
+Header: Cormorant Garamond 22px font-weight 600 color #1A1A1A — "Today's Quests"
+Subtitle directly below: DM Sans 12px color #AAA font-weight 300 — "Small uncomfortable things to try today."
+Margin-bottom: 14px
+
+Quest cards: same styling as before — white card, colored left accent, skill label, difficulty badge, XP, quest title in Cormorant Garamond.
+
+When all quests are completed, replace the quest cards with:
+Cormorant Garamond 16px italic color #AAA — "All done for today."
+
+---
+
+NOTHING ELSE CHANGES. All other screens stay exactly as they are.
